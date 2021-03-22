@@ -1,22 +1,21 @@
 import React from 'react'
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
-import { Button } from '@material-ui/core';
+import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
 import InstallAppFormSubmit from "./InstallAppFormSubmit";
+import DeviceDropdown from "./DeviceDropdown"
+import PackageTable from './PackageTable';
 
+
+const handleInput = () => {
+    console.log("omg")
+  };
 
 const Management = () =>{
-
-    const SearchButton = () => (
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-        )
+    
         
     return(
         <div>
             <h1>Management page</h1>
+            _{/*<DeviceDropdown/>*/}
 
             <div className="App">
                 <InstallAppFormSubmit
@@ -24,6 +23,8 @@ const Management = () =>{
                     //formDescription="This is sample form using Material UI."
                 />
             </div>
+
+            <PackageTable/>
         </div>
         
     );

@@ -8,7 +8,7 @@ const Monitoring = () => {
   useEffect(() => {
     const intervalHandle = setInterval(async () => {
       try {
-        const { data } = (await axios.get('http://127.0.0.1:5000/monitoring')).data;
+        const { data } = (await axios.get('http://127.0.0.1:5000/api/monitoring')).data;
         console.log(data);
         setMonitoringData(data);
       } catch(e) {

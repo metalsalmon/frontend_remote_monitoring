@@ -5,9 +5,9 @@ function NavBar(){
     return(
         <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/Devices">Devices</Link></li>
             <li><Link to="/Monitoring">Monitoring</Link></li>
             <li><Link to="/FileUpload">Upload File</Link></li>
-            <li><Link to="/Management">app management</Link></li>
         </ul>
     );
 }
