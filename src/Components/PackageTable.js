@@ -8,7 +8,7 @@ import {useParams} from "react-router-dom";
 const PackageTable = () =>{
 
     const [devicePackages, setDevicePackages] = useState([]);
-    let { mac } = useParams();
+    const { mac } = useParams();
   
     useEffect(() => {
         const getPackages = async () => {

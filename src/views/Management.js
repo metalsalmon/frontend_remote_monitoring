@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
-import InstallAppFormSubmit from "./InstallAppFormSubmit";
-import DeviceDropdown from "./DeviceDropdown"
-import PackageTable from './PackageTable';
+import InstallAppFormSubmit from "../Components/InstallAppFormSubmit";
+import PackageTable from '../Components/PackageTable';
+import DeviceInfo from '../Components/DeviceInfo'
 
 
 const handleInput = () => {
@@ -15,7 +15,8 @@ const Management = () =>{
     return(
         <div>
             <h1>Management page</h1>
-            _{/*<DeviceDropdown/>*/}
+            <DeviceInfo/>
+            {/*<DeviceDropdown/>*/}
 
             <div className="App">
                 <InstallAppFormSubmit

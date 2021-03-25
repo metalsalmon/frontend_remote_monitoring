@@ -1,15 +1,28 @@
 import React, { useReducer } from "react";
-import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
 
-const InstallAppFormSubmit = (props) => {
+const InstallAppFormSubmit = (props) => 
+{
+  const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
+  const classes = useStyles();
 
+  
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       package: "",
       version: "",
-      action: "install",
+      action: "",
     }
   );
 
@@ -72,16 +85,29 @@ const InstallAppFormSubmit = (props) => {
             helperText="enter version"
             onChange={handleInput}
           />
-          <InputLabel id="label">action</InputLabel>
-          <Select labelId="label" id="select" value="Install" onChange={handleInput} defaultValue={formInput.install} name="action">
-            <MenuItem value="install">Install</MenuItem>
-            <MenuItem value="remove">Remove</MenuItem>
-            <MenuItem value="update">Update</MenuItem>
-          </Select>
+          
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel htmlFor="label">Action</InputLabel>
+            <Select
+              native
+              onChange={handleInput}
+              label="action"
+              inputProps={{
+                name: 'action',
+                id: 'label',
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value='install'>Install</option>
+              <option value='update'>Update</option>
+              <option value='remove'>Remove</option>
+            </Select>
+          </FormControl>
+          
           <Button
             type="submit"
             variant="contained"
-            color="primary"    
+            color="primary"
           >
             Submit 
           </Button>
