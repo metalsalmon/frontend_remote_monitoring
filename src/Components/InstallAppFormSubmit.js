@@ -2,9 +2,13 @@ import React, { useReducer } from "react";
 import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
+import { useParams } from 'react-router';
+import { useSnackbar } from 'notistack';
 
 const InstallAppFormSubmit = (props) => 
 {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { mac } = useParams();
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -20,6 +24,7 @@ const InstallAppFormSubmit = (props) =>
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
+      mac: mac,
       package: "",
       version: "",
       action: "",
@@ -32,7 +37,7 @@ const InstallAppFormSubmit = (props) =>
     let data = { formInput };
 
     sendPostRequest(data);
- 
+
   };
 
   const sendPostRequest = async (data) => {
