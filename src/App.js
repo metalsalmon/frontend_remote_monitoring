@@ -1,5 +1,6 @@
 import './App.css';
 import Monitoring from './views/Monitoring'
+import Tasks from './views/Tasks'
 import FileUpload from './views/FileUpload'
 import Management from './views/Management'
 import Download from './views/Download'
@@ -18,6 +19,7 @@ function App() {
       <Drawer>
         <Route exact path="/" component={Home} />
         <Route exact path="/Devices" component={Devices}/>
+        <Route exact path="/Tasks" component={Tasks} />
         <Route exact path="/FileUpload" component={FileUpload} />
         <Route exact path="/Monitoring" component={Monitoring} />
         <Route exact path="/Management/:mac" component={Management} />

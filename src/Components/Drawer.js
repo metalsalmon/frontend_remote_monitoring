@@ -91,6 +91,10 @@ const PersistentDrawerLeft = props => {
       onClick: () => history.push("/Devices")
     },
     {
+      text: "Tasks",
+      onClick: () => history.push("/Tasks")
+    },
+    {
       text: "Monitoring",
       onClick: () => history.push("/Monitoring")
     },
