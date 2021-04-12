@@ -1,6 +1,5 @@
-import React, { createElement, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
-import InstallAppFormSubmit from "./InstallAppFormSubmit";
 import axios from 'axios';
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
@@ -8,7 +7,7 @@ import {useParams} from "react-router-dom";
 const PackageTable = () =>{
 
     const [devicePackages, setDevicePackages] = useState([]);
-    const { mac } = useParams();
+    const { mac } = useParams();    
   
     useEffect(() => {
         const getPackages = async () => {
@@ -35,12 +34,45 @@ const PackageTable = () =>{
         }
     ]
 
+    const HandleDeleteOnClick = async (packageName) =>{
+        if(window.confirm("You want to remove " + packageName))
+        {
+            const data = 
+            {
+                mac: mac,
+                package: packageName,
+                action: "remove",
+            }
+            try {           
+                  const resp = await axios({
+                    method: 'post',
+                    url : 'http://0.0.0.0:5000/api/management',
+                    data: JSON.stringify(data),
+                    headers: { "Content-Type": "application/json" },
+                  })
+                  console.log(resp.data);
+              } catch (err) {
+                  console.error(err);
+              }
+        }
+    }
+
 
     return(
         <div>
             <MaterialTable title="Packages"
             data={devicePackages}
             columns={columns}
+            actions={[
+                rowData => ({
+                  icon: 'delete',
+                  tooltip: 'Delete package',
+                  onClick: (event, rowData) => HandleDeleteOnClick(rowData.name)
+                })
+              ]}
+              options={{
+                actionsColumnIndex: -1
+              }}
             />
         </div>
     )

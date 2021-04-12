@@ -36,7 +36,7 @@ const InstallAppFormSubmit = (props) =>
 
     let data = { formInput };
 
-    sendPostRequest(data);
+    sendPostRequest(data['formInput']);
 
   };
 
