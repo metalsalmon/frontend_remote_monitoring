@@ -99,10 +99,6 @@ const PersistentDrawerLeft = props => {
       onClick: () => history.push("/Monitoring")
     },
     {
-      text: "Upload File",
-      onClick: () => history.push("/FileUpload")
-    },
-    {
       text: "Download",
       onClick: () => history.push("/Download")
     }

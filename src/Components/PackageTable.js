@@ -3,6 +3,8 @@ import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuIte
 import axios from 'axios';
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
+import ConfigUpload from './ConfigUpload'
+import DataContentUpload from './DataContentUpload'
 
 const PackageTable = () =>{
 
@@ -69,10 +71,24 @@ const PackageTable = () =>{
                   tooltip: 'Delete package',
                   onClick: (event, rowData) => HandleDeleteOnClick(rowData.name)
                 })
-              ]}
-              options={{
-                actionsColumnIndex: -1
-              }}
+            ]}
+            options={{
+            actionsColumnIndex: -1
+            }}
+            detailPanel={rowData => {
+            return (
+                <div>
+                    <h3>upload config</h3>
+                    <ConfigUpload packageName = {rowData.name}/>
+
+                    <h3>upload data</h3>
+                    <DataContentUpload packageName = {rowData.name}/>
+                </div>
+        
+
+            )
+            }}
+            onRowClick={(event, rowData, togglePanel) => togglePanel()}
             />
         </div>
     )
