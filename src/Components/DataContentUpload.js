@@ -29,8 +29,9 @@ const DataContentUpload = (props) => {
     setProgress(0);
 
     const data = new FormData();
+    data.append('type', 'data')
     data.append('packageName', props.packageName)
-    data.append('DataPath', DataPath);
+    data.append('path', DataPath);
     data.append('file', uploadInput.current?.files[0]);
     
     const onUploadProgress = progressEvent => {

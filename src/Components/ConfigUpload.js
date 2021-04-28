@@ -29,8 +29,9 @@ const ConfigUpload = (props) => {
     setProgress(0);
 
     const data = new FormData();
+    data.append('type', 'config')
     data.append('packageName', props.packageName)
-    data.append('configPath', configPath);
+    data.append('path', configPath);
     data.append('file', uploadInput.current?.files[0]);
     
     const onUploadProgress = progressEvent => {
