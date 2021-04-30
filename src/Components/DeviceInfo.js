@@ -24,6 +24,7 @@ const DeviceInfo = () => {
         <div>
             <h2>
                 <Box component="div" display="inline" p={1} m={1}>{deviceInfo.name}</Box>
+                <Box component="div" display="inline" p={1} m={1}>{deviceInfo.ip}</Box>
                 <Box component="div" display="inline" p={1} m={1}>{deviceInfo.mac}</Box>
                 <Box component="div" display="inline" p={1} m={1}>{deviceInfo.distribution}</Box>
                 <Box component="div" display="inline" p={1} m={1}>{deviceInfo.version}</Box>

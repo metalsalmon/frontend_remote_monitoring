@@ -26,6 +26,7 @@ const Devices = () =>{
 
     const columns=[
         {title:'Name', field:'name'},
+        {title:'IP', field:'ip'},
         {title:'Mac', field:'mac'},
         {title:'Distribution', field:'distribution'},
         {title:'Version', field:'version'}
