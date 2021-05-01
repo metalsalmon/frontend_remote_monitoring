@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react';
-import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
 import axios from 'axios';
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
@@ -7,6 +7,7 @@ import ConfigUpload from './ConfigUpload'
 import DataContentUpload from './DataContentUpload'
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
+
 
 const PackageTable = () =>{
 
@@ -67,6 +68,30 @@ const PackageTable = () =>{
         }
     }
 
+    const HandleUpdateOnClick = async (packageName) =>{
+        if(window.confirm("Do you want to update " + packageName))
+        {
+            const data = 
+            {
+                mac: mac,
+                package: packageName,
+                action: 'update',
+                version: ''
+            }
+            try {           
+                  const resp = await axios({
+                    method: 'post',
+                    url : 'http://0.0.0.0:5000/api/management',
+                    data: JSON.stringify(data),
+                    headers: { "Content-Type": "application/json" },
+                  })
+                  console.log(resp.data);
+              } catch (err) {
+                  console.error(err);
+              }
+        }
+    }
+
 
     return(
         <div>
@@ -77,12 +102,13 @@ const PackageTable = () =>{
                 rowData => ({
                   icon: CheckCircleOutlineOutlinedIcon,
                   tooltip: 'up to date',
-                  hidden: rowData.latest_version != ''
+                  hidden: rowData.version != rowData.latest_version
                 }),
                 rowData => ({
                     icon: WarningIcon,
                     tooltip: 'Outdated version',
-                    hidden: rowData.latest_version == ''
+                    hidden: rowData.version == rowData.latest_version,
+                    onClick: (event, rowData) => HandleUpdateOnClick(rowData.name)
                   }),
                 {
                     icon: 'delete',
@@ -96,6 +122,12 @@ const PackageTable = () =>{
             detailPanel={rowData => {
             return (
                 <div>
+                    <Box className="mb25" display="flex" alignItems="center">
+                        
+                    </Box>
+
+
+
                     <h3>upload config</h3>
                     <ConfigUpload packageName = {rowData.name}/>
 

@@ -51,15 +51,12 @@ const ConfigUpload = (props) => {
   return (
     <form onSubmit={handleUpload}>
       <div>
-      <Box className="mb25" display="flex" alignItems="center">
             <Box width="30%" mr={1}>
             <BorderLinearProgress variant="determinate" value={progress} />
             </Box>
             <Box minWidth={35}>
               <Typography variant="body2" color="textSecondary">{`${progress}%`}</Typography>
             </Box>
-          </Box>
-
       </div>
       <div>
         <input ref={uploadInput} type="file" />
