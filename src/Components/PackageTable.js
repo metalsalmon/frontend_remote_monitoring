@@ -5,6 +5,8 @@ import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
 import ConfigUpload from './ConfigUpload'
 import DataContentUpload from './DataContentUpload'
+import WarningIcon from '@material-ui/icons/Warning';
+import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 
 const PackageTable = () =>{
 
@@ -33,11 +35,17 @@ const PackageTable = () =>{
         },
         {
             title:'Version', field:'version'
+        },
+        {
+            title: 'Latest version',
+            field: 'latest_version',
+            hidden: true
+
         }
     ]
 
     const HandleDeleteOnClick = async (packageName) =>{
-        if(window.confirm("You want to remove " + packageName))
+        if(window.confirm("Do you want to remove " + packageName))
         {
             const data = 
             {
@@ -67,10 +75,20 @@ const PackageTable = () =>{
             columns={columns}
             actions={[
                 rowData => ({
-                  icon: 'delete',
-                  tooltip: 'Delete package',
-                  onClick: (event, rowData) => HandleDeleteOnClick(rowData.name)
-                })
+                  icon: CheckCircleOutlineOutlinedIcon,
+                  tooltip: 'up to date',
+                  hidden: rowData.latest_version != ''
+                }),
+                rowData => ({
+                    icon: WarningIcon,
+                    tooltip: 'Outdated version',
+                    hidden: rowData.latest_version == ''
+                  }),
+                {
+                    icon: 'delete',
+                    tooltip: 'Delete package',
+                    onClick: (event, rowData) => HandleDeleteOnClick(rowData.name)
+                }
             ]}
             options={{
             actionsColumnIndex: -1
