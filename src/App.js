@@ -16,7 +16,7 @@ function App() {
     <div className='App'>
       <Events/>
       <Drawer>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Devices} />
         <Route exact path="/Devices" component={Devices}/>
         <Route exact path="/Tasks" component={Tasks} />
         <Route exact path="/Monitoring" component={Monitoring} />
