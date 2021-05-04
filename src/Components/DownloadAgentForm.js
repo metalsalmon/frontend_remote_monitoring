@@ -94,6 +94,7 @@ const DownloadAgentForm = (props) =>
             label="ssh password"
             id="margin-normal"
             name="sshPass"
+            type="password"
             defaultValue={formInput.name}
             helperText="enter ssh password"
             onChange={handleInput}
@@ -103,6 +104,7 @@ const DownloadAgentForm = (props) =>
             label="user password"
             id="margin-normal"
             name="sudoPass"
+            type="password"
             defaultValue={formInput.name}
             helperText="enter user password"
             onChange={handleInput}

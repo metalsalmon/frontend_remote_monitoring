@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MonitorDetail from '../Components/MonitorDetail';
-import { Line, defaults } from 'react-chartjs-2'
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+import { makeStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 750,
+    width: 800,
+  },
+  control: {
+    padding: theme.spacing(),
+  },
+}));
 
 const Monitoring = () => {
   const [monitoringData, setMonitoringData] = useState([]);
   const [AllMonitoringData, setAllMonitoringData] = useState([]);
   // const [cpuData, setcpuData] = useState([]);
+  const classes = useStyles();
 
   const getMonitoringData = async  () => {
     try {
@@ -15,7 +36,7 @@ const Monitoring = () => {
       // setcpuData(prevCpuData => [...prevCpuData, data[0].cpu_usage]);
       setAllMonitoringData(prevMonitoringData => [...prevMonitoringData, data]);
       console.log(data)
-      setTimeout(getMonitoringData, 4000);
+      setTimeout(getMonitoringData, 5000);
     } catch(e) {
       console.log(e);
     }
@@ -27,28 +48,27 @@ const Monitoring = () => {
 
     var arr = [];
     return (
+      
       <div className="Monitoring">
-        
+           <div className={classes.root}>
+
+    </div>
         <h1>Monitoring</h1>
         <div>
           {!monitoringData?.length && false ? (
             <div>loading... </div>
-          ) : (
-            <div>
-              {
-                // monitoringData.forEach((deviceData) => 
-                //   <MonitorDetail data={deviceData}></MonitorDetail>
-                // ),
-                monitoringData.map((deviceData, idx) =>
-                  <MonitorDetail key={idx} data={deviceData}></MonitorDetail>)
-  
-              }
+            ) : (
               <div>
-    </div>
-            </div>  
-            
-          )
-            
+                <Grid container spacing={1}>
+                  {
+                      monitoringData.map((deviceData, idx) =>
+                      
+                      <Grid item xs={12} md = {6}><Paper className={classes.paper}><MonitorDetail key={idx} data={deviceData}></MonitorDetail></Paper></Grid>
+                      )              
+                  }       
+                </Grid>
+              </div>              
+            )          
           }
         </div>
     </div>
