@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, {useEffect, useState, useContext } from 'react';
 import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
 import axios from 'axios';
 import MaterialTable from 'material-table'
@@ -7,12 +7,13 @@ import ConfigUpload from './ConfigUpload'
 import DataContentUpload from './DataContentUpload'
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
+import { Context } from "./Context";
 
 
 const PackageTable = () =>{
-
+    const [context, setContext] = useContext(Context);
     const [devicePackages, setDevicePackages] = useState([]);
-    const { mac } = useParams();    
+    const { mac } = useParams();
   
     useEffect(() => {
         const getPackages = async () => {
@@ -27,7 +28,7 @@ const PackageTable = () =>{
         };
         
         getPackages();
-    }, []);        
+    }, [context]); 
 
     const columns=[
         {

@@ -4,12 +4,7 @@ import InstallAppFormSubmit from "../Components/InstallAppFormSubmit";
 import PackageTable from '../Components/PackageTable';
 import DeviceInfo from '../Components/DeviceInfo'
 
-
-const handleInput = () => {
-    console.log("omg")
-  };
-
-const Management = () =>{
+const Management = ({ lastEvent }) =>{
     
         
     return(

@@ -1,4 +1,4 @@
-import React, { createElement, useEffect, useState } from 'react';
+import React, { createElement, useEffect, useState, useContext } from 'react';
 import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
 import axios from 'axios';
 import MaterialTable from 'material-table'
@@ -9,14 +9,16 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
+import { Context } from "../Components/Context";
 
 
 const Devices = () =>{
 
     const [devices, setDevices] = useState([]);
     const [groups, setGroups] = useState([]);
-      const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
     const history = useHistory();
+    const [context, setContext] = useContext(Context);
   
     useEffect(() => {
         const getDevices = async () => {
@@ -45,7 +47,7 @@ const Devices = () =>{
             };
         getDevices();
         getGroups();
-        }, []);     
+        }, [context]);     
 
     const columns=[
         {title:'Name', field:'name'},

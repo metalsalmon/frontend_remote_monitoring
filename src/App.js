@@ -1,3 +1,5 @@
+import React, {useState ,useContext} from 'react';
+
 import './App.css';
 import Monitoring from './views/Monitoring'
 import Tasks from './views/Tasks'
@@ -8,21 +10,26 @@ import Home from './Components/Home'
 import {Route, Link} from 'react-router-dom'
 import Drawer from "./Components/Drawer"
 import Events from "./Components/WS/Events"
+import { Context } from './Components/Context';
+
 
 
 function App() {
-
+  const [context, setContext] = useState("default context value");
+  
   return (
     <div className='App'>
-      <Events/>
-      <Drawer>
-        <Route exact path="/" component={Devices} />
-        <Route exact path="/Devices" component={Devices}/>
-        <Route exact path="/Tasks" component={Tasks} />
-        <Route exact path="/Monitoring" component={Monitoring} />
-        <Route exact path="/Management/:mac" component={Management} />
-        <Route exact path="/Download" component={Download} />
-      </Drawer>
+      <Context.Provider value={[context, setContext]}>
+        <Events />
+        <Drawer>
+          <Route exact path="/" component={Devices} />
+          <Route exact path="/Devices" component={Devices}/>
+          <Route exact path="/Tasks" component={Tasks} />
+          <Route exact path="/Monitoring" component={Monitoring} />
+          <Route exact path="/Management/:mac" component={Management} />
+          <Route exact path="/Download" component={Download} />
+        </Drawer>
+      </Context.Provider>
     </div>
 
   );
