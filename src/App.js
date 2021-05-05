@@ -4,6 +4,7 @@ import './App.css';
 import Monitoring from './views/Monitoring'
 import Tasks from './views/Tasks'
 import Management from './views/Management'
+import GroupManagement from './views/GroupManagement'
 import Download from './views/Download'
 import Devices from './views/Devices'
 import Home from './Components/Home'
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/Tasks" component={Tasks} />
           <Route exact path="/Monitoring" component={Monitoring} />
           <Route exact path="/Management/:mac" component={Management} />
+          <Route exact path="/GroupManagement/:group" component={GroupManagement} />
           <Route exact path="/Download" component={Download} />
         </Drawer>
       </Context.Provider>

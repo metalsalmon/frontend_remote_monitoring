@@ -1,14 +1,16 @@
-import React, { useReducer } from "react";
-import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
+import React, { useReducer, useState, useEffect } from "react";
+import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router';
 import { useSnackbar } from 'notistack';
+import Grid from '@material-ui/core/Grid';
 
 const InstallAppFormSubmit = (props) => 
 {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { mac } = useParams();
+  const [Groups, setGroups] = useState([]);
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -30,6 +32,29 @@ const InstallAppFormSubmit = (props) =>
       action: "",
     }
   );
+
+  const [GroupInput, setGroupInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      mac: mac,
+      name:''
+    }
+  );
+  
+  useEffect(() => {
+    const getGroups = async () => {
+      try {
+        const data  = (await axios.get('http://127.0.0.1:5000/api/groups')).data;
+        console.log(data)
+        const nameArr = data.map((item) => item.name);
+        setGroups(nameArr)
+      } catch(e) {
+        console.log(e);
+      }
+    };
+    getGroups();
+  }, []);
+
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -62,12 +87,46 @@ const InstallAppFormSubmit = (props) =>
     setFormInput({ [name]: newValue });
   };
 
+  const handleGroupInput = evt => {
+    const name = evt.target.name;
+    const newValue = evt.target.value;
+    setGroupInput({ [name]: newValue });
+  };
 
-  console.log(props);
+  const handleGroupSubmit = evt => {
+    evt.preventDefault();
+
+    let data = { GroupInput };
+                 
+    sendAddGroupRequest(data['GroupInput']);
+
+  };
+
+
+  const sendAddGroupRequest = async (data) => {
+    try {
+      console.log(JSON.stringify(data));
+      
+        const resp = await axios({
+          method: 'post',
+          url : 'http://0.0.0.0:5000/api/addToGroup',
+          data: JSON.stringify(data),
+          headers: { "Content-Type": "application/json" },
+        })
+        console.log(resp.data);
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 
   return (
     <div>
-      <Paper >
+
+      <Grid container spacing={8} > 
+             
+      <Grid item xs={12} md = {6}>
+      <Paper className={classes.paper}>
         <Typography variant="h5" component="h4">
           {props.formName}
         </Typography>
@@ -93,6 +152,7 @@ const InstallAppFormSubmit = (props) =>
           
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel htmlFor="label">Action</InputLabel>
+            
             <Select
               native
               onChange={handleInput}
@@ -109,7 +169,7 @@ const InstallAppFormSubmit = (props) =>
             </Select>
           </FormControl>
           
-          <Button
+          <Button 
             type="submit"
             variant="contained"
             color="primary"
@@ -118,6 +178,48 @@ const InstallAppFormSubmit = (props) =>
           </Button>
         </form>
       </Paper>
+      
+      </Grid>
+
+      <Grid item xs={12} md = {6}><Paper className={classes.paper}>
+      <Typography variant="h5" component="h4">
+          Add to group
+        </Typography>
+        <form onSubmit={handleGroupSubmit}>
+          
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel htmlFor="label">Group</InputLabel>
+            <Select
+              native
+              onChange={handleGroupInput}
+              label="name"
+              inputProps={{
+                name: 'name',
+                id: 'label',
+              }}
+            >
+              <option aria-label="None" value="" />
+              {Groups.map((name) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+               ))}
+            </Select>
+          </FormControl>
+          
+          <Button 
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Add 
+          </Button>
+        </form>
+          
+          </Paper>
+         </Grid>   
+      </Grid>
+      <Box m={10} />
     </div>
   );
 }

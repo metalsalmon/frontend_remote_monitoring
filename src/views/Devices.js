@@ -160,6 +160,8 @@ const Devices = () =>{
                               setData([...dataDelete]);
                           }
                       }}
+                      
+                      onRowClick={(event, rowData) => history.push("/GroupManagement/" + rowData.name)}
                     />
         </div>
         

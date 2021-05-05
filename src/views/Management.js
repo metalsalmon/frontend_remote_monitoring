@@ -4,12 +4,12 @@ import InstallAppFormSubmit from "../Components/InstallAppFormSubmit";
 import PackageTable from '../Components/PackageTable';
 import DeviceInfo from '../Components/DeviceInfo'
 
-const Management = ({ lastEvent }) =>{
+const Management = () =>{
     
         
     return(
         <div>
-            <h1>Management page</h1>
+            <h1>Management</h1>
             <DeviceInfo/>
             {/*<DeviceDropdown/>*/}
 
