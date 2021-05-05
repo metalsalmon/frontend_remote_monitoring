@@ -19,21 +19,22 @@ const BorderLinearProgress = withStyles((theme) => ({
   }
 }))(LinearProgress);
 
-const ConfigUpload = (props) => {
-  const [configPath, setConfigPath] = useState('')
+const GroupDataContentUpload = (props) => {
+  const [DataPath, setDataPath] = useState('')
   const [fileUrl, setFileUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const uploadInput = useRef(null);
-  const { mac } = useParams();
+  const { group } = useParams();
+
 
   const handleUpload = async e => {
     e.preventDefault();
     setProgress(0);
 
     const data = new FormData();
-    data.append('type', 'config')
+    data.append('type', 'data')
     data.append('packageName', props.packageName)
-    data.append('path', configPath);
+    data.append('path', DataPath);
     data.append('file', uploadInput.current?.files[0]);
     
     const onUploadProgress = progressEvent => {
@@ -41,7 +42,7 @@ const ConfigUpload = (props) => {
       console.log(Math.round((100 * progressEvent.loaded) / progressEvent.total));
     }
 
-    const response = await axios.post('/api/upload/' + mac, data, {
+    const response = await axios.post('/api/groupUpload/' + group, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -53,12 +54,13 @@ const ConfigUpload = (props) => {
   return (
     <form onSubmit={handleUpload}>
       <div>
-            <Box width="30%" mr={1}>
-            <BorderLinearProgress variant="determinate" value={progress} />
-            </Box>
-            <Box minWidth={35}>
-              <Typography variant="body2" color="textSecondary">{`${progress}%`}</Typography>
-            </Box>
+          <Box width="30%" mr={1}>
+          <BorderLinearProgress variant="determinate" value={progress} />
+          </Box>
+          <Box minWidth={35}>
+            <Typography variant="body2" color="textSecondary">{`${progress}%`}</Typography>
+          </Box>
+
       </div>
       <div>
         <input ref={uploadInput} type="file" />
@@ -66,11 +68,11 @@ const ConfigUpload = (props) => {
       <br />
       
       <div>
-        <TextField value={configPath} onChange={(e) => setConfigPath(e.target.value)} label="config path" />
+        <TextField value={DataPath} onChange={(e) => setDataPath(e.target.value)} label="data path" />
         <button>Upload</button>
       </div>
     </form>
   );
 }
 
-export default ConfigUpload;
+export default GroupDataContentUpload;

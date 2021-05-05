@@ -3,8 +3,8 @@ import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, Me
 import axios from 'axios';
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
-import ConfigUpload from '../ConfigUpload'
-import DataContentUpload from '../DataContentUpload'
+import GroupConfigUpload from './GroupConfigUpload'
+import GroupDataContentUpload from './GroupDataContentUpload'
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import { Context } from "../Context";
@@ -130,10 +130,10 @@ const GroupPackageTable = () =>{
 
 
                     <h3>upload config</h3>
-                    <ConfigUpload packageName = {rowData.name}/>
+                    <GroupConfigUpload packageName = {rowData.name}/>
 
                     <h3>upload data</h3>
-                    <DataContentUpload packageName = {rowData.name}/>
+                    <GroupDataContentUpload packageName = {rowData.name}/>
                 </div>
         
 

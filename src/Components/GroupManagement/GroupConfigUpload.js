@@ -19,12 +19,12 @@ const BorderLinearProgress = withStyles((theme) => ({
   }
 }))(LinearProgress);
 
-const ConfigUpload = (props) => {
+const GroupConfigUpload = (props) => {
   const [configPath, setConfigPath] = useState('')
   const [fileUrl, setFileUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const uploadInput = useRef(null);
-  const { mac } = useParams();
+  const { group } = useParams();
 
   const handleUpload = async e => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const ConfigUpload = (props) => {
       console.log(Math.round((100 * progressEvent.loaded) / progressEvent.total));
     }
 
-    const response = await axios.post('/api/upload/' + mac, data, {
+    const response = await axios.post('/api/groupUpload/' + group, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -73,4 +73,4 @@ const ConfigUpload = (props) => {
   );
 }
 
-export default ConfigUpload;
+export default GroupConfigUpload;
