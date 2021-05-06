@@ -1,10 +1,10 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router';
 import { useSnackbar } from 'notistack';
 import Grid from '@material-ui/core/Grid';
+import api from '../http-axios'
 
 const InstallAppFormSubmit = (props) => 
 {
@@ -44,7 +44,7 @@ const InstallAppFormSubmit = (props) =>
   useEffect(() => {
     const getGroups = async () => {
       try {
-        const data  = (await axios.get('http://127.0.0.1:5000/api/groups')).data;
+        const data  = (await api.get('/api/groups')).data;
         console.log(data)
         const nameArr = data.map((item) => item.name);
         setGroups(nameArr)
@@ -69,12 +69,9 @@ const InstallAppFormSubmit = (props) =>
     try {
       console.log(JSON.stringify(data));
       
-        const resp = await axios({
-          method: 'post',
-          url : 'http://0.0.0.0:5000/api/management',
-          data: JSON.stringify(data),
-          headers: { "Content-Type": "application/json" },
-        })
+        const resp = await api.post('/api/management',
+          JSON.stringify(data),
+        )
         console.log(resp.data);
     } catch (err) {
         console.error(err);
@@ -107,12 +104,9 @@ const InstallAppFormSubmit = (props) =>
     try {
       console.log(JSON.stringify(data));
       
-        const resp = await axios({
-          method: 'post',
-          url : 'http://0.0.0.0:5000/api/addToGroup',
-          data: JSON.stringify(data),
-          headers: { "Content-Type": "application/json" },
-        })
+        const resp = await api.post('/api/addToGroup',
+          JSON.stringify(data),
+          )
         console.log(resp.data);
     } catch (err) {
         console.error(err);

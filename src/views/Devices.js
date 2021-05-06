@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
 import MaterialTable from 'material-table'
 import { useHistory } from "react-router-dom"
 import { Input } from "@material-ui/core";
@@ -9,6 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import { Context } from "../Components/Context";
 import CloseIcon from '@material-ui/icons/Close';
+import api from '../http-axios'
 
 
 const Devices = () =>{
@@ -22,7 +22,7 @@ const Devices = () =>{
     useEffect(() => {
         const getDevices = async () => {
           try {
-              const resp  = await axios.get('http://127.0.0.1:5000/api/devices');
+              const resp  = await api.get('/api/devices');
               
               console.log(resp.data);
               setDevices(resp.data);
@@ -34,7 +34,7 @@ const Devices = () =>{
 
           const getGroups = async () => {
             try {
-                const resp  = await axios.get('http://127.0.0.1:5000/api/groups');
+                const resp  = await api.get('/api/groups');
                 
                 console.log(resp.data);
                 setGroups(resp.data);
@@ -124,12 +124,9 @@ const Devices = () =>{
                                 name: newData.name
                             }
                             try {           
-                                  const resp = await axios({
-                                    method: 'post',
-                                    url : 'http://0.0.0.0:5000/api/groups',
-                                    data: JSON.stringify(addRequest),
-                                    headers: { "Content-Type": "application/json" },
-                                  })
+                                  const resp = await api.post('/api/groups', 
+                                    JSON.stringify(addRequest)
+                                  )
                                   console.log(resp.data);
                               } catch (err) {
                                   console.error(err);
@@ -144,12 +141,9 @@ const Devices = () =>{
                                 old_name: oldData.name
                             }
                             try {           
-                                  const resp = await axios({
-                                    method: 'post',
-                                    url : 'http://0.0.0.0:5000/api/groups',
-                                    data: JSON.stringify(updateRequest),
-                                    headers: { "Content-Type": "application/json" },
-                                  })
+                                  const resp = await api.post('/api/groups',
+                                    JSON.stringify(updateRequest)
+                                  )
                                   console.log(resp.data);
                               } catch (err) {
                                   console.error(err);
@@ -166,12 +160,9 @@ const Devices = () =>{
                                   name: oldData.name
                               }
                               try {           
-                                    const resp = await axios({
-                                      method: 'post',
-                                      url : 'http://0.0.0.0:5000/api/groups',
-                                      data: JSON.stringify(delete_request),
-                                      headers: { "Content-Type": "application/json" },
-                                    })
+                                    const resp = await api.post('/api/groups',
+                                      JSON.stringify(delete_request),
+                                    )
                                     console.log(resp.data);
                                 } catch (err) {
                                     console.error(err);

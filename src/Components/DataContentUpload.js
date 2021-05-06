@@ -1,7 +1,7 @@
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Box, Typography, Button, ListItem, withStyles, TextField } from '@material-ui/core';
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import api from '../http-axios'
 import { useParams } from 'react-router';
 
 
@@ -21,7 +21,6 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const DataContentUpload = (props) => {
   const [DataPath, setDataPath] = useState('')
-  const [fileUrl, setFileUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const uploadInput = useRef(null);
   const { mac } = useParams();
@@ -42,13 +41,12 @@ const DataContentUpload = (props) => {
       console.log(Math.round((100 * progressEvent.loaded) / progressEvent.total));
     }
 
-    const response = await axios.post('/api/upload/' + mac, data, {
+    const response = await api.post('/api/upload/' + mac, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
       onUploadProgress,
     });
-    setFileUrl(`http://localhost:5000/${response.file}`);
   }
 
   return (

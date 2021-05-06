@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import DeviceDetail from './DeviceDetail'
 import { makeStyles } from '@material-ui/core/styles';
+import api from '../../http-axios'
 
 
 const GroupDevicesInfo = () => {
@@ -12,7 +12,7 @@ const GroupDevicesInfo = () => {
     useEffect(() => {
         const getDevice = async () => {
             try {
-                const data = await (await axios.get('http://127.0.0.1:5000/api/groupDevices/' + group)).data
+                const data = await (await api.get('/api/groupDevices/' + group)).data
                 console.log(data);
                 const nameArr = data.map((item) => item);
                 setDeviceInfo(nameArr);

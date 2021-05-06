@@ -1,7 +1,7 @@
 import React, { createElement, useEffect, useState } from 'react';
 import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
 import InstallAppFormSubmit from "./InstallAppFormSubmit";
-import axios from 'axios';
+import api from '../http-axios'
 
 const DeviceDropdown = () =>{
   const [deviceData, setDeviceData] = useState([]);
@@ -13,7 +13,7 @@ const DeviceDropdown = () =>{
   useEffect(() => {
     const getDevices = async () => {
       try {
-          const resp  = await axios.get('http://127.0.0.1:5000/api/devices');
+          const resp  = await api.get('/api/devices');
           
           console.log(resp.data);
           setDeviceData(resp.data);

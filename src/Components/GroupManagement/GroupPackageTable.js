@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext } from 'react';
 import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
-import axios from 'axios';
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
 import GroupConfigUpload from './GroupConfigUpload'
@@ -8,6 +7,7 @@ import GroupDataContentUpload from './GroupDataContentUpload'
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import { Context } from "../Context";
+import api from '../../http-axios'
 
 
 const GroupPackageTable = () =>{
@@ -18,7 +18,7 @@ const GroupPackageTable = () =>{
     useEffect(() => {
         const getPackages = async () => {
             try {
-                const resp  = await axios.get('http://127.0.0.1:5000/api/groupPackages/' + group);
+                const resp  = await api.get('/api/groupPackages/' + group);
                 
                 console.log(resp.data);
                 setDevicePackages(resp.data);
@@ -56,12 +56,9 @@ const GroupPackageTable = () =>{
                 action: "remove",
             }
             try {           
-                  const resp = await axios({
-                    method: 'post',
-                    url : 'http://0.0.0.0:5000/api/groupManagement',
-                    data: JSON.stringify(data),
-                    headers: { "Content-Type": "application/json" },
-                  })
+                const resp = await api.post('/api/groupManagement',
+                    JSON.stringify(data),
+                )
                   console.log(resp.data);
               } catch (err) {
                   console.error(err);
@@ -80,12 +77,9 @@ const GroupPackageTable = () =>{
                 version: ''
             }
             try {           
-                  const resp = await axios({
-                    method: 'post',
-                    url : 'http://0.0.0.0:5000/api/groupManagement',
-                    data: JSON.stringify(data),
-                    headers: { "Content-Type": "application/json" },
-                  })
+                const resp = await api.post('/api/groupManagement',
+                    JSON.stringify(data),
+                )
                   console.log(resp.data);
               } catch (err) {
                   console.error(err);

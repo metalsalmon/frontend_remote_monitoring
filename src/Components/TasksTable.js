@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
+import api from '../http-axios'
 
 const TasksTable = () =>{
 
@@ -10,7 +10,7 @@ const TasksTable = () =>{
     useEffect(() => {
         const getTasks = async () => {
             try {
-                const resp  = await axios.get('http://127.0.0.1:5000/api/tasks');
+                const resp  = await api.get('/api/tasks');
                 
                 console.log(resp.data);
                 setTasks(resp.data);

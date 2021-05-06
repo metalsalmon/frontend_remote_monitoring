@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import Box from '@material-ui/core/Box';
+import api from '../http-axios'
 
 const DeviceInfo = () => {
     const [deviceInfo, setDeviceInfo] = useState([])
@@ -10,7 +10,7 @@ const DeviceInfo = () => {
     useEffect(() => {
         const getDevice = async () => {
             try {
-                const resp = await axios.get('http://127.0.0.1:5000/api/device/' + mac)
+                const resp = await api.get('/api/device/' + mac)
                 console.log(resp.data);
                 setDeviceInfo(resp.data);
             } catch(e) {

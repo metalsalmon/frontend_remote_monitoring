@@ -1,10 +1,10 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router';
 import { useSnackbar } from 'notistack';
 import Grid from '@material-ui/core/Grid';
+import api from '../../http-axios'
 
 const ManageApp = (props) => 
 {
@@ -46,12 +46,9 @@ const ManageApp = (props) =>
     try {
       console.log(JSON.stringify(data));
       
-        const resp = await axios({
-          method: 'post',
-          url : 'http://0.0.0.0:5000/api/groupManagement',
-          data: JSON.stringify(data),
-          headers: { "Content-Type": "application/json" },
-        })
+        const resp = await api.post('/api/groupManagement',
+          JSON.stringify(data),
+        )
         console.log(resp.data);
     } catch (err) {
         console.error(err);

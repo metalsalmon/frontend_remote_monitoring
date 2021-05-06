@@ -1,8 +1,8 @@
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Box, Typography, Button, ListItem, withStyles, TextField } from '@material-ui/core';
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router';
+import api from '../../http-axios'
 
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -21,7 +21,6 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 const GroupConfigUpload = (props) => {
   const [configPath, setConfigPath] = useState('')
-  const [fileUrl, setFileUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const uploadInput = useRef(null);
   const { group } = useParams();
@@ -41,13 +40,12 @@ const GroupConfigUpload = (props) => {
       console.log(Math.round((100 * progressEvent.loaded) / progressEvent.total));
     }
 
-    const response = await axios.post('/api/groupUpload/' + group, data, {
+    const response = await api.post('/api/groupUpload/' + group, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
       onUploadProgress,
     });
-    setFileUrl(`http://localhost:5000/${response.file}`);
   }
 
   return (

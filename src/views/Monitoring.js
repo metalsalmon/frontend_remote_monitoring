@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import MonitorDetail from '../Components/MonitorDetail';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +8,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import api from '../http-axios'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +31,7 @@ const Monitoring = () => {
 
   const getMonitoringData = async  () => {
     try {
-      const { data } = (await axios.get('http://127.0.0.1:5000/api/monitoring')).data;
+      const { data } = (await api.get('/api/monitoring')).data;
       setMonitoringData(data);
       // setcpuData(prevCpuData => [...prevCpuData, data[0].cpu_usage]);
       setAllMonitoringData(prevMonitoringData => [...prevMonitoringData, data]);
