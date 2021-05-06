@@ -11,12 +11,15 @@ const Events = () => {
       const socket = io("http://127.0.0.1:5000");
       socket.on("notifications", data => {
         setContext(data);
-        enqueueSnackbar(data, {
-          anchorOrigin: {
-              vertical: 'bottom',
-              horizontal: 'right',
-          }
-        });
+        if(data != ''){
+          enqueueSnackbar(data, {
+            anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'right',
+            }
+          });
+
+        }
       });
     }, []);
     

@@ -1,5 +1,4 @@
-import React, { createElement, useEffect, useState, useContext } from 'react';
-import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import MaterialTable from 'material-table'
 import { useHistory } from "react-router-dom"
@@ -8,8 +7,8 @@ import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
-import SearchIcon from "@material-ui/icons/Search";
 import { Context } from "../Components/Context";
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const Devices = () =>{
@@ -54,7 +53,8 @@ const Devices = () =>{
         {title:'IP', field:'ip'},
         {title:'Mac', field:'mac'},
         {title:'Distribution', field:'distribution'},
-        {title:'Version', field:'version'}
+        {title:'Version', field:'version'},
+        {title:'Connected', field:'connected', hidden: true}
     ]
 
     const groupColumns=[
@@ -68,6 +68,29 @@ const Devices = () =>{
             <MaterialTable title="Devices"
               data={devices}
               columns={columns}
+              actions={[
+                rowData => ({
+                  icon: CheckIcon,
+                  tooltip: 'online',
+                  hidden: !rowData.connected,
+                  disabled: true
+                }),
+                rowData => ({
+                    icon: CloseIcon,
+                    tooltip: 'offline',
+                    hidden: rowData.connected == true,
+                    disabled: true,
+                  })
+            ]}
+            options={{
+              actionsColumnIndex: -1,
+
+              }}
+              localization={{
+                header: {
+                actions:  "Connected",
+                }
+                }}
               onRowClick={(event, rowData) => history.push("/Management/" + rowData.mac)}
             />
 
