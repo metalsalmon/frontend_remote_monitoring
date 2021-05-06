@@ -69,8 +69,8 @@ const GroupPackageTable = () =>{
         }
     }
 
-    const HandleUpdateOnClick = async (packageName) =>{
-        if(window.confirm("Do you want to update " + packageName))
+    const HandleUpdateOnClick = async (packageName, latestVersion) =>{
+        if(window.confirm("Do you want to update " + packageName  +  ' (' + latestVersion + ')'))
         {
             const data = 
             {
@@ -109,7 +109,7 @@ const GroupPackageTable = () =>{
                     icon: WarningIcon,
                     tooltip: 'Outdated version',
                     hidden: rowData.version == rowData.latest_version,
-                    onClick: (event, rowData) => HandleUpdateOnClick(rowData.name)
+                    onClick: (event, rowData) => HandleUpdateOnClick(rowData.name, rowData.latest_version)
                   }),
                 {
                     icon: 'delete',
