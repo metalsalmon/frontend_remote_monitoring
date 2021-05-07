@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
 import api from '../http-axios'
+import { Context } from "./Context";
 
 const TasksTable = () =>{
 
     const [tasks, setTasks] = useState([]);
+    const [context, setContext] = useContext(Context);
 
     useEffect(() => {
         const getTasks = async () => {
@@ -20,7 +22,7 @@ const TasksTable = () =>{
         };
         
         getTasks();
-    }, []);        
+    }, [context]);        
 
     const columns=[
         {

@@ -6,6 +6,7 @@ import ConfigUpload from './ConfigUpload'
 import DataContentUpload from './DataContentUpload'
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
+import UpdateIcon from '@material-ui/icons/Update';
 import { Context } from "./Context";
 import api from '../http-axios'
 
@@ -87,6 +88,25 @@ const PackageTable = () =>{
         }
     }
 
+    const HandleUpdateAllClick = async () =>{
+        if(window.confirm("Do you want to update all?"))
+        {
+            const data = 
+            {
+                mac: mac,
+                action: 'updateAll'
+            }
+            try {           
+                  const resp = await api.post('/api/management',
+                    JSON.stringify(data),
+                    )
+                  console.log(resp.data);
+              } catch (err) {
+                  console.error(err);
+              }
+        }
+    }
+
 
     return(
         <div>
@@ -94,6 +114,12 @@ const PackageTable = () =>{
             data={devicePackages}
             columns={columns}
             actions={[
+                {
+                    icon: 'updateIcon',
+                    tooltip: 'Update all',
+                    isFreeAction: true,
+                    onClick: (event) => HandleUpdateAllClick()
+                },
                 rowData => ({
                   icon: CheckCircleOutlineOutlinedIcon,
                   tooltip: 'up to date',
