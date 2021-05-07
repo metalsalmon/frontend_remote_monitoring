@@ -40,6 +40,9 @@ const TasksTable = () =>{
         },
         {
             title: 'Created', field: 'created_at'
+        },
+        {
+            title: 'Finished', field: 'finished'
         }
     ]
 
