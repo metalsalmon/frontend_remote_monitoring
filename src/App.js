@@ -11,12 +11,14 @@ import {Route, Link} from 'react-router-dom'
 import Drawer from "./Components/Drawer"
 import Events from "./Components/WS/Events"
 import { Context } from './Components/Context';
-
+import{ useEffect } from 'react';
 
 
 function App() {
   const [context, setContext] = useState("default context value");
-  
+  useEffect(() => {
+    document.title = "Monitoring and management"
+  }, [])
   return (
     <div className='App'>
       <Context.Provider value={[context, setContext]}>
