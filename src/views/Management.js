@@ -14,7 +14,7 @@ const Management = () =>{
 
             <div className="App">
                 <DeviceManagementBar
-                    formName="Install app"
+                    formName="Manage app"
                     //formDescription="This is sample form using Material UI."
                 />
             </div>

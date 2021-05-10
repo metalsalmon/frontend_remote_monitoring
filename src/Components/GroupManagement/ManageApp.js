@@ -81,7 +81,7 @@ const ManageApp = (props) =>
   return (
     <div>
 
-      <Grid container spacing={8} > 
+      <Grid container spacing={4} className={classes.root}>   
         <Grid item xs={12} xl = {6}>
           <Paper className={classes.padded}>
             <Typography variant="h5" component="h4">
@@ -139,17 +139,18 @@ const ManageApp = (props) =>
           </Paper>
         </Grid>
       
-      <Grid item xs={12} md = {4}><Paper className={classes.paper}>
-          <h3>upload script</h3>
+      <Grid item xs={12} md = {6}>
+        <Paper className={classes.padded}>
+            <Typography variant="h5" component="h4">
+              Upload script
+            </Typography>
           <GroupScriptUpload/>
           
           </Paper>
       </Grid>  
       
-      <Box m={10} />
-      
       </Grid>
-      <Box m={10} />
+      <Box m={3} />
     </div>
   );
 }
