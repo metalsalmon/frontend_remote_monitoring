@@ -1,12 +1,11 @@
 import React, {useEffect, useState, useContext } from 'react';
-import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
 import ConfigUpload from './ConfigUpload'
 import DataContentUpload from './DataContentUpload'
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
-import UpdateIcon from '@material-ui/icons/Update';
 import { Context } from "./Context";
 import api from '../http-axios'
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import DeviceDetail from './DeviceDetail'
-import { makeStyles } from '@material-ui/core/styles';
 import api from '../../http-axios'
 
 

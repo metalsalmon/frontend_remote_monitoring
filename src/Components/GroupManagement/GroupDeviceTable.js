@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import MaterialTable from 'material-table'
 import { useHistory } from "react-router-dom"
-import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from '@material-ui/icons/Close';
 import api from '../../http-axios';

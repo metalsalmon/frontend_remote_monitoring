@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
 import InstallAppFormSubmit from "../Components/InstallAppFormSubmit";
 import PackageTable from '../Components/PackageTable';
 import DeviceInfo from '../Components/DeviceInfo'

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext } from 'react';
-import { Box, Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
 import GroupConfigUpload from './GroupConfigUpload'

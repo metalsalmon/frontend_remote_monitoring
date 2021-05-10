@@ -1,5 +1,4 @@
-import React, {useState ,useContext} from 'react';
-
+import React, {useState} from 'react';
 import './App.css';
 import Monitoring from './views/Monitoring'
 import Tasks from './views/Tasks'
@@ -7,7 +6,7 @@ import Management from './views/Management'
 import GroupManagement from './views/GroupManagement'
 import Download from './views/Download'
 import Devices from './views/Devices'
-import {Route, Link} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import Drawer from "./Components/Drawer"
 import Events from "./Components/WS/Events"
 import { Context } from './Components/Context';

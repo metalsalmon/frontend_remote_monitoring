@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import {useEffect, useContext} from 'react';
 import { io } from "socket.io-client";
 import { useSnackbar } from 'notistack';
 import { Context } from "../Context";

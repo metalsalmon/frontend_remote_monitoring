@@ -1,8 +1,6 @@
 import React, { useReducer } from "react";
-import { Button, Icon, TextField, Paper, Typography, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
+import { Button, TextField, Paper, Typography, InputLabel, Select, FormControl } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import { useParams } from 'react-router';
-import { useSnackbar } from 'notistack';
 import api from '../http-axios'
 
 const DownloadAgentForm = (props) => 
