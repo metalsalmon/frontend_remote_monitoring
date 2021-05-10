@@ -7,6 +7,9 @@ const DownloadAgentForm = (props) =>
 {
 
   const useStyles = makeStyles((theme) => ({
+    root: {
+      marginBottom: 16
+    },
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120,
@@ -14,6 +17,19 @@ const DownloadAgentForm = (props) =>
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    centered: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    flex: {
+      flex: '1'
+    },
+    padded: {
+      padding: 16
+    },
+    marginRight: {
+      marginRight: 8
+    }
   }));
   const classes = useStyles();
 
@@ -62,13 +78,14 @@ const DownloadAgentForm = (props) =>
 
   return (
     <div>
+      
       <Paper >
         <Typography variant="h5" component="h4">
           {props.formName}
         </Typography>
         <Typography component="p">{props.formDescription}</Typography>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
           <TextField
             label="IP"
             id="margin-normal"
