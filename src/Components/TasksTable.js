@@ -26,6 +26,10 @@ const TasksTable = () =>{
 
     const columns=[
         {
+            title:'IP', field:'ip'
+
+        },
+        {
             title:'Action', field:'action'
 
         },
@@ -34,6 +38,9 @@ const TasksTable = () =>{
         },
         {
             title: 'Message', field: 'message'
+        },
+        {
+            title: 'State', field: 'state'
         },
         {
             title: 'Done', field: 'done'
