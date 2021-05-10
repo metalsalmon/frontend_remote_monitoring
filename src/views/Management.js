@@ -1,5 +1,5 @@
 import React from 'react'
-import InstallAppFormSubmit from "../Components/InstallAppFormSubmit";
+import DeviceManagementBar from "../Components/DeviceManagementBar";
 import PackageTable from '../Components/PackageTable';
 import DeviceInfo from '../Components/DeviceInfo'
 
@@ -13,7 +13,7 @@ const Management = () =>{
             {/*<DeviceDropdown/>*/}
 
             <div className="App">
-                <InstallAppFormSubmit
+                <DeviceManagementBar
                     formName="Install app"
                     //formDescription="This is sample form using Material UI."
                 />

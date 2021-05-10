@@ -5,8 +5,9 @@ import { useParams } from 'react-router';
 import { useSnackbar } from 'notistack';
 import Grid from '@material-ui/core/Grid';
 import api from '../http-axios'
+import ScriptUpload from './ScriptUpload'
 
-const InstallAppFormSubmit = (props) => 
+const DeviceManagementBar = (props) => 
 {
   const { mac } = useParams();
   const [Groups, setGroups] = useState([]);
@@ -174,7 +175,7 @@ const InstallAppFormSubmit = (props) =>
       
       </Grid>
 
-      <Grid item xs={12} md = {6}><Paper className={classes.paper}>
+      <Grid item xs={12} md = {2}><Paper className={classes.paper}>
       <Typography variant="h5" component="h4">
           Add to group
         </Typography>
@@ -211,10 +212,18 @@ const InstallAppFormSubmit = (props) =>
           
           </Paper>
          </Grid>   
+
+
+      <Grid item xs={12} md = {4}><Paper className={classes.paper}>
+          <h3>upload script</h3>
+          <ScriptUpload/>
+          
+          </Paper>
+         </Grid>  
       </Grid>
       <Box m={10} />
     </div>
   );
 }
 
-export default InstallAppFormSubmit;
+export default DeviceManagementBar;

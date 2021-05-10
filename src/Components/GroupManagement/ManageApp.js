@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { useSnackbar } from 'notistack';
 import Grid from '@material-ui/core/Grid';
 import api from '../../http-axios'
+import GroupScriptUpload from './GroupScriptUpload'
 
 const ManageApp = (props) => 
 {
@@ -121,7 +122,16 @@ const ManageApp = (props) =>
       </Paper>
       
       </Grid>
-
+      
+      <Grid item xs={12} md = {4}><Paper className={classes.paper}>
+          <h3>upload script</h3>
+          <GroupScriptUpload/>
+          
+          </Paper>
+      </Grid>  
+      
+      <Box m={10} />
+      
       </Grid>
       <Box m={10} />
     </div>
