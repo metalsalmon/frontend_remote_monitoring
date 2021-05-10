@@ -12,6 +12,9 @@ const DeviceManagementBar = (props) =>
   const { mac } = useParams();
   const [Groups, setGroups] = useState([]);
   const useStyles = makeStyles((theme) => ({
+    root: {
+      marginBottom: 16
+    },
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120,
@@ -19,6 +22,19 @@ const DeviceManagementBar = (props) =>
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    centered: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    flex: {
+      flex: '1'
+    },
+    padded: {
+      padding: 16
+    },
+    marginRight: {
+      marginRight: 8
+    }
   }));
   const classes = useStyles();
 
@@ -116,112 +132,114 @@ const DeviceManagementBar = (props) =>
 
   return (
     <div>
+      <Grid container spacing={4} className={classes.root}>      
+        <Grid item xs={12} xl = {6}>
+        <Paper className={classes.padded}>
+          <Typography variant="h5" component="h4">
+            {props.formName}
+          </Typography>
+          <Typography component="p">{props.formDescription}</Typography>
 
-      <Grid container spacing={8} > 
-             
-      <Grid item xs={12} md = {6}>
-      <Paper className={classes.paper}>
-        <Typography variant="h5" component="h4">
-          {props.formName}
-        </Typography>
-        <Typography component="p">{props.formDescription}</Typography>
-
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Package"
-            id="margin-normal"
-            name="package"
-            defaultValue={formInput.TextField}
-            helperText="enter name of the app/package"
-            onChange={handleInput}
-          />
-          <TextField
-            label="Version"
-            id="margin-normal"
-            name="version"
-            defaultValue={formInput.name}
-            helperText="enter version"
-            onChange={handleInput}
-          />
-          
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="label">Action</InputLabel>
-            
-            <Select
-              native
+          <form onSubmit={handleSubmit} className={classes.centered}>
+            <TextField
+              label="Package"
+              id="margin-normal"
+              name="package"
+              defaultValue={formInput.TextField}
+              helperText="enter name of the app/package"
               onChange={handleInput}
-              label="action"
-              inputProps={{
-                name: 'action',
-                id: 'label',
-              }}
+              className={`${classes.flex} ${classes.marginRight}`}
+            />
+            <TextField
+              label="Version"
+              id="margin-normal"
+              name="version"
+              defaultValue={formInput.name}
+              helperText="enter version"
+              onChange={handleInput}
+              className={classes.flex}
+            />
+            
+            <FormControl variant="outlined" className={`${classes.formControl} ${classes.flex}`}>
+              <InputLabel htmlFor="label">Action</InputLabel>
+              
+              <Select
+                native
+                onChange={handleInput}
+                label="action"
+                inputProps={{
+                  name: 'action',
+                  id: 'label',
+                }}
+              >
+                <option aria-label="None" value="" />
+                <option value='install'>Install</option>
+                <option value='update'>Update</option>
+                <option value='remove'>Remove</option>
+              </Select>
+            </FormControl>
+            
+            <Button 
+              type="submit"
+              variant="contained"
+              color="primary"
             >
-              <option aria-label="None" value="" />
-              <option value='install'>Install</option>
-              <option value='update'>Update</option>
-              <option value='remove'>Remove</option>
-            </Select>
-          </FormControl>
-          
-          <Button 
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Submit 
-          </Button>
-        </form>
-      </Paper>
-      
-      </Grid>
+              Submit 
+            </Button>
+          </form>
+        </Paper>
+        
+        </Grid>
 
-      <Grid item xs={12} md = {2}><Paper className={classes.paper}>
-      <Typography variant="h5" component="h4">
-          Add to group
-        </Typography>
-        <form onSubmit={handleGroupSubmit}>
-          
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="label">Group</InputLabel>
-            <Select
-              native
-              onChange={handleGroupInput}
-              label="name"
-              inputProps={{
-                name: 'name',
-                id: 'label',
-              }}
+        <Grid item xs={12} xl = {2}><Paper className={classes.padded}>
+        <Typography variant="h5" component="h4">
+            Add to group
+          </Typography>
+          <form onSubmit={handleGroupSubmit} className={classes.centered}>
+            
+            <FormControl variant="outlined" className={`${classes.formControl} ${classes.flex}`}>
+              <InputLabel htmlFor="label">Group</InputLabel>
+              <Select
+                native
+                onChange={handleGroupInput}
+                label="name"
+                inputProps={{
+                  name: 'name',
+                  id: 'label',
+                }}
+              >
+                <option aria-label="None" value="" />
+                {Groups.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+            
+            <Button 
+              type="submit"
+              variant="contained"
+              color="primary"
             >
-              <option aria-label="None" value="" />
-              {Groups.map((name) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-               ))}
-            </Select>
-          </FormControl>
-          
-          <Button 
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Add 
-          </Button>
-        </form>
-          
-          </Paper>
-         </Grid>   
+              Add 
+            </Button>
+          </form>
+            
+            </Paper>
+          </Grid>   
 
 
-      <Grid item xs={12} md = {4}><Paper className={classes.paper}>
-          <h3>upload script</h3>
-          <ScriptUpload/>
-          
+        <Grid item xs={12} xl = {4}>
+          <Paper className={classes.padded}>
+            <Typography variant="h5" component="h4">
+              Upload script
+            </Typography>
+            <ScriptUpload/>
+            
           </Paper>
-         </Grid>  
+        </Grid>
       </Grid>
-      <Box m={10} />
     </div>
   );
 }

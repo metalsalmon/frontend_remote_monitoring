@@ -1,9 +1,19 @@
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { Box, Typography, withStyles, TextField } from '@material-ui/core';
+import { Box, Typography, withStyles, TextField, Button, Grid } from '@material-ui/core';
 import React, { useState, useRef } from 'react';
 import api from '../http-axios'
 import { useParams } from 'react-router';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  centered: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  flex: {
+    flex: '1'
+  }
+}));
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -20,6 +30,8 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 const ScriptUpload = () => {
+  const classes = useStyles();
+
   const [DataPath, setDataPath] = useState('')
   const [progress, setProgress] = useState(0);
   const uploadInput = useRef(null);
@@ -50,22 +62,27 @@ const ScriptUpload = () => {
 
   return (
     <form onSubmit={handleUpload}>
-      <div>
-          <Box width="30%" mr={1}>
-          <BorderLinearProgress variant="determinate" value={progress} />
+      <Grid container>    
+        <Grid item xs={12}>
+          <Box mr={1}>
+            <BorderLinearProgress variant="determinate" value={progress} />
           </Box>
           <Box minWidth={35}>
             <Typography variant="body2" color="textSecondary">{`${progress}%`}</Typography>
           </Box>
+        </Grid>
 
-      </div>
-      <div>
-        <input ref={uploadInput} type="file" />
-      </div>
-      <br />
-      <div>
-        <button>Upload</button>
-      </div>
+        <Grid item xs={12} className={classes.centered}>
+          <input ref={uploadInput} type="file" className={classes.flex}/>
+          <Button 
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Upload
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   );
 }
