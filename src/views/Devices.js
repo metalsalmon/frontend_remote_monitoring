@@ -8,6 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import { Context } from "../Components/Context";
 import CloseIcon from '@material-ui/icons/Close';
+import replayIcon from '@material-ui/icons/Replay';
 import api from '../http-axios'
 
 
@@ -62,6 +63,24 @@ const Devices = () =>{
 
   ]
 
+  const HandleRebootClick = async (ip, mac) =>{
+    if(window.confirm("Do you want to reboot " + ip))
+    {
+        const data = 
+        {
+            mac: mac
+        }
+        try {           
+              const resp = await api.post('api/reboot',
+                JSON.stringify(data),
+              )
+              console.log(resp.data);
+          } catch (err) {
+              console.error(err);
+          }
+    }
+}
+
     return(
         <div>
           <div></div>
@@ -80,7 +99,12 @@ const Devices = () =>{
                     tooltip: 'offline',
                     hidden: rowData.connected == true,
                     disabled: true,
-                  })
+                  }),
+                  {
+                    icon: replayIcon,
+                    tooltip: 'reboot device',
+                    onClick: (event, rowData) => HandleRebootClick(rowData.ip, rowData.mac)
+                  }
             ]}
             options={{
               actionsColumnIndex: -1,
