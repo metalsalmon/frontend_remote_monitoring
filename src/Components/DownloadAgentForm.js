@@ -19,7 +19,8 @@ const DownloadAgentForm = (props) =>
     },
     centered: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     flex: {
       flex: '1'
@@ -85,7 +86,7 @@ const DownloadAgentForm = (props) =>
         </Typography>
         <Typography component="p">{props.formDescription}</Typography>
 
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit} className={classes.centered}>
           <TextField
             label="IP"
             id="margin-normal"
@@ -93,6 +94,7 @@ const DownloadAgentForm = (props) =>
             defaultValue={formInput.TextField}
             helperText="enter IP of remote host"
             onChange={handleInput}
+            className={classes.marginRight}
           />
           <TextField
             label="user name"
@@ -101,6 +103,7 @@ const DownloadAgentForm = (props) =>
             defaultValue={formInput.TextField}
             helperText="enter username"
             onChange={handleInput}
+            className={classes.marginRight}
           />
           <TextField
             label="ssh password"
@@ -110,6 +113,7 @@ const DownloadAgentForm = (props) =>
             defaultValue={formInput.name}
             helperText="enter ssh password"
             onChange={handleInput}
+            className={classes.marginRight}
           />
 
           <TextField
