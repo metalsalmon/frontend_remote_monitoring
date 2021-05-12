@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext } from 'react';
-import { Box } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import MaterialTable from 'material-table'
 import {useParams} from "react-router-dom";
 import GroupConfigUpload from './GroupConfigUpload'
@@ -8,9 +8,20 @@ import WarningIcon from '@material-ui/icons/Warning';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import { Context } from "../Context";
 import api from '../../http-axios'
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+    tableItem: {
+      margin: 0,
+      padding: 16
+    },
+    marginLeft: {
+        marginLeft: 16
+    }
+  }));
 
 const GroupPackageTable = () =>{
+    const classes = useStyles();
     const [context, setContext] = useContext(Context);
     const [devicePackages, setDevicePackages] = useState([]);
     const { group } = useParams();
@@ -116,21 +127,17 @@ const GroupPackageTable = () =>{
             }}
             detailPanel={rowData => {
             return (
-                <div>
-                    <Box className="mb25" display="flex" alignItems="center">
-                        
-                    </Box>
+                    <Grid container className={classes.tableItem}>
+                        <Grid item xs={12} lg={3}>
+                            <h3 className={classes.marginLeft}>Upload config</h3>
+                            <GroupConfigUpload packageName = {rowData.name}/>
+                        </Grid>
 
-
-
-                    <h3>upload config</h3>
-                    <GroupConfigUpload packageName = {rowData.name}/>
-
-                    <h3>upload data</h3>
-                    <GroupDataContentUpload packageName = {rowData.name}/>
-                </div>
-        
-
+                        <Grid item xs={12} lg={3}>
+                            <h3>Upload data</h3>
+                            <GroupDataContentUpload packageName = {rowData.name}/>
+                        </Grid>
+                    </Grid>
             )
             }}
             onRowClick={(event, rowData, togglePanel) => togglePanel()}

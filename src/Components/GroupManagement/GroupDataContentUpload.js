@@ -1,9 +1,25 @@
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { Box, Typography, withStyles, TextField } from '@material-ui/core';
+import { Grid, Typography, withStyles, TextField, Button } from '@material-ui/core';
 import React, { useState, useRef } from 'react';
 import api from '../../http-axios'
 import { useParams } from 'react-router';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  marginBottom: {
+    marginBottom: 16,
+  },
+  flexContainer: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  flex: {
+    flex: '1'
+  },
+  padded: {
+    padding: 16,
+  }
+}));
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -20,6 +36,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 const GroupDataContentUpload = (props) => {
+  const classes = useStyles();
   const [DataPath, setDataPath] = useState('')
   const [progress, setProgress] = useState(0);
   const uploadInput = useRef(null);
@@ -51,24 +68,28 @@ const GroupDataContentUpload = (props) => {
 
   return (
     <form onSubmit={handleUpload}>
-      <div>
-          <Box width="30%" mr={1}>
+      <Grid container className={classes.padded}>
+        <Grid item xs={12}>
           <BorderLinearProgress variant="determinate" value={progress} />
-          </Box>
-          <Box minWidth={35}>
-            <Typography variant="body2" color="textSecondary">{`${progress}%`}</Typography>
-          </Box>
+          <Typography variant="body2" color="textSecondary">{`${progress}%`}</Typography>
+        </Grid>
 
-      </div>
-      <div>
-        <input ref={uploadInput} type="file" />
-      </div>
-      <br />
-      
-      <div>
-        <TextField value={DataPath} onChange={(e) => setDataPath(e.target.value)} label="data path" />
-        <button>Upload</button>
-      </div>
+        <Grid item xs={12} className={classes.marginBottom}>
+          <TextField value={DataPath} onChange={(e) => setDataPath(e.target.value)} label="data path" />
+        </Grid>
+        
+        <Grid item xs={12} className={classes.flexContainer}>
+          <input ref={uploadInput} type="file" className={classes.flex}/>
+        
+          <Button 
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Upload
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   );
 }
