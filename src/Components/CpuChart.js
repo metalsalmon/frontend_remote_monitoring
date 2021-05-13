@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 
 
 
-const CpuChart = ({cpuData, ramData, time}) => {
+const CpuChart = ({cpuData, ramData, cpuTemp, time}) => {
   return (
     <Line
         data={{
@@ -21,6 +21,13 @@ const CpuChart = ({cpuData, ramData, time}) => {
               data: ramData,
               fill: false,
               borderColor: 'rgba(255, 5, 10, 1)',
+              borderWidth: 1,
+            },
+            { 
+              label: 'cpu temperature',
+              data: cpuTemp,
+              fill: false,
+              borderColor: 'rgba(0, 255, 200, 1)',
               borderWidth: 1,
             }
           ],
