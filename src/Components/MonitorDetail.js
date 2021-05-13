@@ -1,7 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import CpuChart from '../Components/CpuChart';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  list: {
+    listStyle: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 16,
+    '& li': {
+        padding: 16
+    }
+  },
+}));
 
 const MonitorDetail = ({ data }) => {
+    const classes = useStyles();
     const { ip, cpu_usage, disk_space, used_disk_space, ram_usage, time, cpu_temp } = data;
 
     const [cpuData, setCpuData] = useState([]);
@@ -18,10 +33,10 @@ const MonitorDetail = ({ data }) => {
 
     return(
         <div>
-            <ul>
+            <ul className={classes.list}>
                 <li>IP: {ip}</li>
                 <li>CPU: {cpu_usage} %</li>
-                <li>CPU: {cpu_temp} °</li>
+                <li>CPU: {cpu_temp} °C</li>
                 <li>Ram: {ram_usage} %</li>
                 <li>Disk: {used_disk_space}/{disk_space} GB</li>
 

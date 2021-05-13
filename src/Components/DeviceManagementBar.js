@@ -133,7 +133,7 @@ const DeviceManagementBar = (props) =>
   return (
     <div>
       <Grid container spacing={4} className={classes.root}>      
-        <Grid item xs={12} xl = {6}>
+        <Grid item xs={12} lg = {6}>
         <Paper className={classes.padded}>
           <Typography variant="h5" component="h4">
             {props.formName}
@@ -191,7 +191,7 @@ const DeviceManagementBar = (props) =>
         
         </Grid>
 
-        <Grid item xs={12} xl = {2}><Paper className={classes.padded}>
+        <Grid item xs={12} lg = {2}><Paper className={classes.padded}>
         <Typography variant="h5" component="h4">
             Add to group
           </Typography>
@@ -230,7 +230,7 @@ const DeviceManagementBar = (props) =>
           </Grid>   
 
 
-        <Grid item xs={12} xl = {4}>
+        <Grid item xs={12} lg = {4}>
           <Paper className={classes.padded}>
             <Typography variant="h5" component="h4">
               Upload script

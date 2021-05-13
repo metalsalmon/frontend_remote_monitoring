@@ -82,7 +82,7 @@ const ManageApp = (props) =>
     <div>
 
       <Grid container spacing={4} className={classes.root}>   
-        <Grid item xs={12} xl = {6}>
+        <Grid item xs={12} lg = {6}>
           <Paper className={classes.padded}>
             <Typography variant="h5" component="h4">
               {props.formName}
