@@ -68,6 +68,7 @@ const Devices = () =>{
     {
         const data = 
         {
+            type: 'device',
             mac: mac
         }
         try {           

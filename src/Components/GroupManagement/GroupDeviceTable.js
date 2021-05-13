@@ -6,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import api from '../../http-axios';
 import { Context } from "../Context";
 import {useParams} from "react-router-dom";
+import replayIcon from '@material-ui/icons/Replay';
 
 
 const GroupDeviceTable = () =>{
@@ -57,6 +58,24 @@ const GroupDeviceTable = () =>{
         }
     }
 
+    const HandleRebootClick = async () =>{
+      if(window.confirm("Do you want to reboot all devices?"))
+      {
+        const data = 
+        {
+            type: group,
+        }
+        try {           
+              const resp = await api.post('api/reboot',
+                JSON.stringify(data),
+              )
+              console.log(resp.data);
+          } catch (err) {
+              console.error(err);
+          }
+      }
+  }
+
     return(
         <div>
           <div></div>
@@ -80,6 +99,12 @@ const GroupDeviceTable = () =>{
                     icon: 'delete',
                     tooltip: 'remove from group',
                     onClick: (event, rowData) => HandleDeleteOnClick(rowData.name, rowData.mac)
+                },
+                {
+                  icon: replayIcon,
+                  tooltip: 'reboot all',
+                  isFreeAction: true,
+                  onClick: (event) => HandleRebootClick()
                 }
             ]}
             options={{
