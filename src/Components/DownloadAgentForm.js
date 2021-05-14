@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { Button, TextField, Paper, Typography, InputLabel, Select, FormControl } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import api from '../http-axios'
+import Checkbox from '@material-ui/core/Checkbox';
 
 const DownloadAgentForm = (props) => 
 {
@@ -45,14 +46,23 @@ const DownloadAgentForm = (props) =>
       os: ""
     }
   );
+  const [checked, setChecked] = React.useState(true);
 
   const handleSubmit = evt => {
     evt.preventDefault();
 
     let data = { formInput };
+    if(checked){
+      sendPostRequest(data['formInput']);
+    }
+    else{
+      sendDeleteRequest(data['formInput']);  
+    }
 
-    sendPostRequest(data['formInput']);
+  };
 
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   };
 
   const sendPostRequest = async (data) => {
@@ -66,6 +76,19 @@ const DownloadAgentForm = (props) =>
     } catch (err) {
         console.error(err);
     }
+};
+
+const sendDeleteRequest = async (data) => {
+  try {
+    console.log(JSON.stringify(data));
+    
+      const resp = await api.post('/api/remove',
+        JSON.stringify(data),
+      )
+      console.log(resp.data);
+  } catch (err) {
+      console.error(err);
+  }
 };
 
   const handleInput = evt => {
@@ -87,6 +110,11 @@ const DownloadAgentForm = (props) =>
         <Typography component="p">{props.formDescription}</Typography>
 
         <form onSubmit={handleSubmit} className={classes.centered}>
+          <Checkbox
+            checked={checked}
+            onChange={handleChange}
+            color="primary"
+          />
           <TextField
             label="IP"
             id="margin-normal"
