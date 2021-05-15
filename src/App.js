@@ -1,18 +1,37 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react';
 import './App.css';
-import Monitoring from './views/Monitoring';
-import FileUpload from './Components/FileUpload';
-import Home from './Components/Home'
-import {Route, Link} from 'react-router-dom'
-import NavBar from './Components/NavBar'
+import Monitoring from './views/Monitoring'
+import Tasks from './views/Tasks'
+import Management from './views/Management'
+import GroupManagement from './views/GroupManagement'
+import Download from './views/Download'
+import Devices from './views/Devices'
+import {Route} from 'react-router-dom'
+import Drawer from "./Components/Drawer"
+import Events from "./Components/WS/Events"
+import { Context } from './Components/Context';
+import{ useEffect } from 'react';
+
 
 function App() {
+  const [context, setContext] = useState("default context value");
+  useEffect(() => {
+    document.title = "Monitoring and management"
+  }, [])
   return (
     <div className='App'>
-      <NavBar/>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/FileUpload" component={FileUpload} />
-      <Route exact path="/Monitoring" component={Monitoring} />
+      <Context.Provider value={[context, setContext]}>
+        <Events />
+        <Drawer>
+          <Route exact path="/" component={Devices} />
+          <Route exact path="/Devices" component={Devices}/>
+          <Route exact path="/Tasks" component={Tasks} />
+          <Route exact path="/Monitoring" component={Monitoring} />
+          <Route exact path="/Management/:mac" component={Management} />
+          <Route exact path="/GroupManagement/:group" component={GroupManagement} />
+          <Route exact path="/Download" component={Download} />
+        </Drawer>
+      </Context.Provider>
     </div>
 
   );
